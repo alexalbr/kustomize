@@ -369,7 +369,7 @@ func (p *HelmChartInflationGeneratorPlugin) markHelmGeneratedResources(rm resmap
 
 // checkHelmVersion will return an error if the helm version is not V3
 func (p *HelmChartInflationGeneratorPlugin) checkHelmVersion() error {
-	stdout, err := p.runHelmCommand([]string{"version", "-c", "--short"})
+	stdout, err := p.runHelmCommand([]string{"version", "--short"})
 	if err != nil {
 		return err
 	}
@@ -385,7 +385,7 @@ func (p *HelmChartInflationGeneratorPlugin) checkHelmVersion() error {
 		v = v[1:]
 	}
 	majorVersion := strings.Split(v, ".")[0]
-	if majorVersion != "3" {
+	if majorVersion != "4" {
 		return fmt.Errorf("this plugin requires helm V3 but got v%s", v)
 	}
 	return nil
